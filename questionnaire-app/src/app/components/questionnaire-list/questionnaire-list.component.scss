@@ -1,0 +1,19 @@
+.add-questionnaire-button {
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.questionnaires-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content {
+        min-width: 350px;
+    }
+}
+
+table {
+    width: 50%;
+}

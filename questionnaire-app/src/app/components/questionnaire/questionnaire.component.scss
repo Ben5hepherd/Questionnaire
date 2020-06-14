@@ -1,0 +1,26 @@
+::ng-deep .mat-card-header-text {
+    margin: 0px !important;
+}
+
+.action-buttons {
+    display: inline-block;
+}
+
+.add-section-button {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.add-question-button {
+    margin-right: 30px;
+    display: inline-block;
+}
+
+.add-response-button {
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.no-questions {
+    text-align: center;
+}

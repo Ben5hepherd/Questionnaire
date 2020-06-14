@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuestionnaireApp.Domain\QuestionnaireApp.Domain.csproj" />
+    <ProjectReference Include="..\QuestionnaireApp.Orm\QuestionnaireApp.Orm.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="action-buttons">
+            <div class="add-section-button">
+                <button mat-raised-button color="primary" (click)="openAddSectionDialog()">Add Section</button>
+            </div>
+            <div class="add-question-button">
+                <button mat-raised-button color="primary" (click)="openAddQuestionDialog()">Add Question</button>
+            </div>
+        </div>
+        <div *ngFor="let section of orderedSections">
+            <section [name]="section.name" [questions]="section.questions"></section>
+            <br />
+            <hr>
+        </div>
+    </mat-card-content>
+</mat-card>

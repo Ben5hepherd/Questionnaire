@@ -1,0 +1,15 @@
+<div class="banner">
+    <div class="title">Questionnaire App</div>
+    <div class="menu-item">
+        <button mat-button class="home-menu-item" (click)="navigateToHome()">Home</button>
+    </div>
+    <div class="login-menu-item" *ngIf="!this.authenticationService.currentUser">
+        <button mat-button class="login-menu-item" (click)="navigateToLogin()">Login</button>
+    </div>
+    <div class="login-menu-item" *ngIf="this.authenticationService.currentUser">
+        Logged in as {{this.authenticationService.currentUser.name}}
+    </div>
+    <!-- <div class="login-menu-item" *ngIf="this.authenticationService.currentUser">
+        <button mat-button class="login-menu-item" (click)="logout()">Logout</button>
+    </div> -->
+</div>

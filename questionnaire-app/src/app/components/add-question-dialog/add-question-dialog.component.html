@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Add a new question</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Section</mat-label>
+        <mat-select [(ngModel)]="data.sectionId">
+            <mat-option *ngFor="let section of data.sections" [value]="section.id">
+                {{section.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Text</mat-label>
+        <input matInput [(ngModel)]="data.text">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="secondary" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Add</button>
+</div>
