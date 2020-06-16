@@ -36,6 +36,6 @@ export class LoginComponent implements OnInit {
       Password: this.registerPassword
     }
 
-    this.authenticationService.registerUser(model);
+    this.authenticationService.registerUser(model).subscribe(result => result);
   }
 }

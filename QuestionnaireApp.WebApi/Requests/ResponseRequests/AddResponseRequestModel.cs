@@ -1,8 +1,7 @@
 ﻿namespace QuestionnaireApp.WebApi.Requests.ResponseRequests
 {
-    public class GetResponseByQuestionnaireAndUserModel
+    public class AddResponseRequestModel
     {
         public int QuestionnaireId { get; set; }
-        public int UserId { get; set; }
     }
 }

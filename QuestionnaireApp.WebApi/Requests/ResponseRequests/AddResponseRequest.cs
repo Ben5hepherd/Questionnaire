@@ -1,8 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using QuestionnaireApp.CommandQuery.Commands.Interfaces;
 using QuestionnaireApp.CommandQuery.Queries.Interfaces;
 using QuestionnaireApp.Domain;
+using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,27 +14,36 @@ namespace QuestionnaireApp.WebApi.Requests.ResponseRequests
 {
     public class AddResponseRequest : IRequest<int>
     {
-        public AddResponseModel Model { get; set; }
+        public AddResponseRequestModel RequestModel { get; set; }
 
         public class AddResponseRequestHandler : IRequestHandler<AddResponseRequest, int>
         {
             private readonly IAddEntityCommand AddEntityCommand;
             private readonly IGetEntityByIdQuery GetEntityByIdQuery;
             private readonly IGetAllEntitiesQuery GetAllEntitiesQuery;
+            private readonly IHttpContextAccessor HttpContextAccessor;
 
             public AddResponseRequestHandler(
                 IAddEntityCommand addEntityCommand,
                 IGetEntityByIdQuery getEntityByIdQuery,
-                IGetAllEntitiesQuery getAllEntitiesQuery)
+                IGetAllEntitiesQuery getAllEntitiesQuery,
+                IHttpContextAccessor httpContextAccessor)
             {
                 AddEntityCommand = addEntityCommand;
                 GetEntityByIdQuery = getEntityByIdQuery;
                 GetAllEntitiesQuery = getAllEntitiesQuery;
+                HttpContextAccessor = httpContextAccessor;
             }
 
             public Task<int> Handle(AddResponseRequest request, CancellationToken cancellationToken)
             {
-                var model = request.Model;
+                var currentUserSid = HttpContextAccessor.HttpContext.User.Claims.Single(c => c.Type == JwtRegisteredClaimNames.Sid).Value;
+                var model = new AddResponseModel
+                {
+                    QuestionnaireId = request.RequestModel.QuestionnaireId,
+                    CompletedByUserId = int.Parse(currentUserSid)
+                };
+
                 var user = GetEntityByIdQuery.Execute<User>(model.CompletedByUserId);
                 var questionnaire = GetEntityByIdQuery.Execute<Questionnaire>(model.QuestionnaireId);
 
@@ -67,10 +79,8 @@ namespace QuestionnaireApp.WebApi.Requests.ResponseRequests
 
         public AddResponseRequestValidator()
         {
-            RuleFor(x => x.Model.CompletedByUserId).NotEmpty();
-            RuleFor(x => x.Model.QuestionnaireId).NotEmpty();
-            RuleFor(x => x.Model.CompletedByUserId).Must(userId => ValidatorExtensions.IsEntityExistent<User>(userId));
-            RuleFor(x => x.Model.QuestionnaireId).Must(questionnaireId => ValidatorExtensions.IsEntityExistent<Questionnaire>(questionnaireId));
+            RuleFor(x => x.RequestModel.QuestionnaireId).NotEmpty();
+            RuleFor(x => x.RequestModel.QuestionnaireId).Must(questionnaireId => ValidatorExtensions.IsEntityExistent<Questionnaire>(questionnaireId));
         }
     }
 }

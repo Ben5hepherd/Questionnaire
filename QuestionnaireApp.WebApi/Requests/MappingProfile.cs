@@ -13,6 +13,7 @@ namespace QuestionnaireApp.WebApi.Requests
             CreateMap<Questionnaire, QuestionnaireViewModel>();
             CreateMap<Section, SectionViewModel>();
             CreateMap<Question, QuestionViewModel>();
+            CreateMap<Response, ResponseViewModel>();
         }
     }
 }

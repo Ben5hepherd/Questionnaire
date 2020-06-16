@@ -19,6 +19,7 @@ namespace QuestionnaireApp.Orm
         public DbSet<Questionnaire> Questionnaires { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Response> Responses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +28,7 @@ namespace QuestionnaireApp.Orm
             modelBuilder.Entity<Questionnaire>().ToTable("Questionnaires");
             modelBuilder.Entity<Section>().ToTable("Sections");
             modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Response>().ToTable("Response");
         }
     }
 }

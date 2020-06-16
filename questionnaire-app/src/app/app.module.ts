@@ -27,6 +27,9 @@ import { LoginComponent } from './components/login/login.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { BannerComponent } from './components/banner/banner.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../app/interceptors/token-interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +59,13 @@ import { BannerComponent } from './components/banner/banner.component';
     FormsModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [AddSectionDialogComponent, AddQuestionDialogComponent]
 })

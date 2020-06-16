@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuestionnaireApp.WebApi.Requests.ResponseRequests;
 using QuestionnaireApp.WebApi.ViewModels;
@@ -14,22 +17,19 @@ namespace QuestionnaireApp.WebApi.Controllers
 
         public ResponseController(IMediator mediator) => this.mediator = mediator;
 
-        [HttpGet]
-        public ICollection<ResponseViewModel> Get()
+        [HttpGet("{questionnaireId}")]
+        [Authorize]
+        public List<ResponseViewModel> Get(int questionnaireId)
         {
-            return mediator.Send(new GetAllResponsesRequest()).Result;
-        }
-
-        [HttpGet]
-        public ResponseViewModel Get(GetResponseByQuestionnaireAndUserModel model)
-        {
-            return mediator.Send(new GetResponseByQuestionnaireAndUserRequest { Model = model }).Result;
+            /* -- Ultimately use HttpContext.User to verify user is an admin, by an IsAdmin property on User table --*/
+            return mediator.Send(new GetResponsesByQuestionnaireIdRequest { QuestionnaireId = questionnaireId }).Result;
         }
 
         [HttpPost]
-        public int Post(AddResponseModel model)
+        [Authorize]
+        public int Post(AddResponseRequestModel requestModel)
         {
-            return mediator.Send(new AddResponseRequest { Model = model }).Result;
+            return mediator.Send(new AddResponseRequest { RequestModel = requestModel }).Result;
         }
     }
 }

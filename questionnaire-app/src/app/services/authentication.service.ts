@@ -8,22 +8,18 @@ import { HttpClient } from '@angular/common/http';
 export class AuthenticationService {
 
   public currentUser: UserViewModel;
+  public bearerToken: string;
 
   constructor(private httpClient: HttpClient) { }
 
   registerUser(model) {
-    return this.httpClient.post<number>('http://localhost:4400/api/user', model).subscribe(result => {
-      this.currentUser = new UserViewModel();
-      this.currentUser.id = result;
-      this.currentUser.name = model.Name;
-      this.currentUser.email = model.Email;
-    });
+    return this.httpClient.post<number>('http://localhost:4400/api/user', model);
   }
 
   loginUser(model) {
-    return this.httpClient.put<number>('http://localhost:4400/api/user', model).subscribe(result => {
+    return this.httpClient.post<any>('http://localhost:4400/api/login', model).subscribe(result => {
+      this.bearerToken = result.token;
       this.currentUser = new UserViewModel();
-      this.currentUser.id = result;
       this.currentUser.name = model.Name;
       this.currentUser.email = model.Email;
     });

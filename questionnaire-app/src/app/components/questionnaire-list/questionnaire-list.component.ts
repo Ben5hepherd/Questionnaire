@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import QuestionnaireService from '../../services/questionnaire.service';
 import QuestionnaireListViewModel from '../../view_models/questionnaire-list-view-model';
 import { Router } from '@angular/router';
-import { ResponseService } from 'src/app/services/response.service';
+import ResponseService from '../../services/response.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-questionnaire-list',
@@ -14,7 +15,6 @@ export class QuestionnaireListComponent implements OnInit {
 
   questionnairesList: QuestionnaireListViewModel[] = [];
   displayedColumns: string[] = ['id', 'name', 'createdDate', 'viewButton', 'responseButton'];
-  currentUserId: number;
 
   constructor(
     private questionnaireService: QuestionnaireService,
@@ -24,9 +24,6 @@ export class QuestionnaireListComponent implements OnInit {
 
   ngOnInit() {
     this.getAllQuestionnaires();
-    if (this.authenticationService.currentUser) {
-      this.currentUserId = this.authenticationService.currentUser.id;
-    }
   }
 
   getAllQuestionnaires() {
@@ -62,13 +59,11 @@ export class QuestionnaireListComponent implements OnInit {
   }
 
   addResponse(questionnaireId: number) {
-    let model = {
-      CompletedByUserId: this.currentUserId,
-      QuestionnaireId: questionnaireId
-    };
+    var model = { QuestionnaireId: questionnaireId };
+    this.responseService.post(model).subscribe(result => this.viewResponse(result));
+  }
 
-    this.responseService.post(model).subscribe(result => {
-      return this.router.navigateByUrl('/response/' + result);
-    });
+  viewResponse(responseId: number) {
+    return this.router.navigateByUrl('/response/' + responseId);
   }
 }

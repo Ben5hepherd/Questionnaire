@@ -2,8 +2,7 @@
 {
     public class AnswerViewModel : EntityViewModel
     {
-        public string QuestionText { get; set; }
-        public int QuestionOrdinal { get; set; }
-        public string AnswerText { get; set; }
+        public string Text { get; set; }
+        public QuestionViewModel Question { get; set; }
     }
 }

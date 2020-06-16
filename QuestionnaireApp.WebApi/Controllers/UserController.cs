@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuestionnaireApp.WebApi.Requests.UserRequests;
 using QuestionnaireApp.WebApi.ViewModels;
+using System.Collections.Generic;
 
 namespace QuestionnaireApp.WebApi.Controllers
 {
@@ -21,9 +21,9 @@ namespace QuestionnaireApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public int Post(AddUserModel model)
+        public int Post(RegisterUserModel model)
         {
-            return mediator.Send(new AddUserRequest() { Model = model }).Result;
+            return mediator.Send(new RegisterUserRequest() { Model = model }).Result;
         }
     }
 }
