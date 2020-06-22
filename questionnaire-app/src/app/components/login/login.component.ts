@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,11 @@ export class LoginComponent implements OnInit {
   registerPassword: string;
   registerPasswordConfirmation: string;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  showRegisterAccount: boolean = true;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  constructor(private authenticationService: AuthenticationService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -36,6 +41,17 @@ export class LoginComponent implements OnInit {
       Password: this.registerPassword
     }
 
-    this.authenticationService.registerUser(model).subscribe(result => result);
+    this.authenticationService.registerUser(model).subscribe(result => {
+      this.showRegisterAccount = false;
+      this.openAccountRegisteredSnackBar();
+    });
+  }
+
+  openAccountRegisteredSnackBar() {
+    this.snackBar.open('Account successfully registered', 'Close', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 }

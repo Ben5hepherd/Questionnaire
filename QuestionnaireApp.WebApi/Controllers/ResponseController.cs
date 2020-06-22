@@ -17,12 +17,10 @@ namespace QuestionnaireApp.WebApi.Controllers
 
         public ResponseController(IMediator mediator) => this.mediator = mediator;
 
-        [HttpGet("{questionnaireId}")]
-        [Authorize]
-        public List<ResponseViewModel> Get(int questionnaireId)
+        [HttpGet("{responseId}")]
+        public ResponseViewModel Get(int responseId)
         {
-            /* -- Ultimately use HttpContext.User to verify user is an admin, by an IsAdmin property on User table --*/
-            return mediator.Send(new GetResponsesByQuestionnaireIdRequest { QuestionnaireId = questionnaireId }).Result;
+            return mediator.Send(new GetResponseByIdRequest { ResponseId = responseId }).Result;
         }
 
         [HttpPost]
@@ -30,6 +28,12 @@ namespace QuestionnaireApp.WebApi.Controllers
         public int Post(AddResponseRequestModel requestModel)
         {
             return mediator.Send(new AddResponseRequest { RequestModel = requestModel }).Result;
+        }
+
+        [HttpGet("GetResponsesByQuestionnaireId/{questionnaireId}")]
+        public IEnumerable<ResponseViewModel> GetResponsesByQuestionnaireId(int questionnaireId)
+        {
+            return mediator.Send(new GetResponsesByQuestionnaireIdRequest { QuestionnaireId = questionnaireId }).Result;
         }
     }
 }

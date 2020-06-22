@@ -15,18 +15,20 @@ using QuestionnaireApp.CommandQuery.Queries;
 using QuestionnaireApp.CommandQuery.Queries.Interfaces;
 using QuestionnaireApp.Orm;
 using QuestionnaireApp.WebApi.Requests;
+using QuestionnaireApp.WebApi.ViewModels.Builders;
+using QuestionnaireApp.WebApi.ViewModels.Builders.Interfaces;
 using System.Text;
 
 namespace QuestionnaireApp.WebApi
 {
     public class Startup
     {
+        public IConfiguration configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -46,6 +48,9 @@ namespace QuestionnaireApp.WebApi
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            var jwtIssuer = configuration["Jwt:Issuer"];
+            var jwtKey = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -55,9 +60,9 @@ namespace QuestionnaireApp.WebApi
                         ValidateAudience = false,
                         ValidateLifetime = false,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                        ValidIssuer = jwtIssuer,
+                        ValidAudience = jwtIssuer,
+                        IssuerSigningKey = new SymmetricSecurityKey(jwtKey)
                     };
                 });
 
@@ -69,13 +74,17 @@ namespace QuestionnaireApp.WebApi
             services.AddScoped<IGetAllEntitiesQuery, GetAllEntitiesQuery>();
             services.AddScoped<IGetEntityByIdQuery, GetEntityByIdQuery>();
             services.AddScoped<IGetQuestionnaireByIdQuery, GetQuestionnaireByIdQuery>();
+            services.AddScoped<IGetResponseByIdQuery, GetResponseByIdQuery>();
             services.AddScoped<IGetUserByEmailAddressQuery, GetUserByEmailAddressQuery>();
+            services.AddScoped<IGetAllResponsesByQuestionnaireIdQuery, GetAllResponsesByQuestionnaireIdQuery>();
 
             services.AddScoped<IAddEntityCommand, AddEntityCommand>();
             services.AddScoped<IUpdateEntityCommand, UpdateEntityCommand>();
             services.AddScoped<IDeleteEntityCommand, DeleteEntityCommand>();
 
             services.AddScoped<IValidatorExtensions, ValidatorExtensions>();
+
+            services.AddScoped<IResponseViewModelBuilder, ResponseViewModelBuilder>();
 
             services.AddMediatR(typeof(Startup));
 
@@ -101,6 +110,9 @@ namespace QuestionnaireApp.WebApi
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseMvc();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
         }
     }
 }

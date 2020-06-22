@@ -14,6 +14,7 @@ namespace QuestionnaireApp.WebApi.Requests
             CreateMap<Section, SectionViewModel>();
             CreateMap<Question, QuestionViewModel>();
             CreateMap<Response, ResponseViewModel>();
+            CreateMap<Answer, AnswerViewModel>();
         }
     }
 }

@@ -1,0 +1,32 @@
+<div class="responses-container">
+    <div>
+        <h2>Responses for Questionnaire: {{questionnaireName}}</h2>
+    </div>
+    <mat-accordion class="example-headers-align" multi *ngFor="let response of responses">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{response.id}} - {{response.completedByUser.email}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    DATE COMPLETED (TO-DO)
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngFor="let section of response.sections">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>{{section.sectionOrdinal + 1}} - {{section.sectionName}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div *ngFor="let answer of section.answers">
+                            <h4>{{answer.question.ordinal + 1}} - {{answer.question.text}}</h4>
+                            <p *ngIf="answer.text && answer.text.length > 0">{{answer.text}}</p>
+                            <p *ngIf="!answer.text || answer.text.length === 0">NO ANSWER GIVEN</p>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <br />
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

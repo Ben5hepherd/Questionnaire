@@ -26,9 +26,14 @@ import { SectionComponent } from './components/section/section.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { BannerComponent } from './components/banner/banner.component';
-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../app/interceptors/token-interceptor';
+import { AnswerComponent } from './components/answer/answer.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ResponseListComponent } from './components/response-list/response-list.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,9 @@ import { TokenInterceptor } from '../app/interceptors/token-interceptor';
     AddSectionDialogComponent,
     SectionComponent,
     LoginComponent,
-    BannerComponent
+    BannerComponent,
+    AnswerComponent,
+    ResponseListComponent
   ],
   imports: [
     BrowserModule,
@@ -57,13 +64,20 @@ import { TokenInterceptor } from '../app/interceptors/token-interceptor';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
     }
   ],
   bootstrap: [AppComponent],

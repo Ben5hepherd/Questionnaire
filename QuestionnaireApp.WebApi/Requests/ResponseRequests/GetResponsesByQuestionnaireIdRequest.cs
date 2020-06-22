@@ -1,36 +1,34 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 using QuestionnaireApp.CommandQuery.Queries.Interfaces;
 using QuestionnaireApp.Domain;
 using QuestionnaireApp.WebApi.ViewModels;
+using QuestionnaireApp.WebApi.ViewModels.Builders.Interfaces;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace QuestionnaireApp.WebApi.Requests.ResponseRequests
 {
-    public class GetResponsesByQuestionnaireIdRequest : IRequest<List<ResponseViewModel>>
+    public class GetResponsesByQuestionnaireIdRequest : IRequest<IEnumerable<ResponseViewModel>>
     {
         public int QuestionnaireId { get; set; }
 
-        public class GetResponsesByQuestionnaireIdRequestHandler : IRequestHandler<GetResponsesByQuestionnaireIdRequest, List<ResponseViewModel>>
+        public class GetResponsesByQuestionnaireIdRequestHandler : IRequestHandler<GetResponsesByQuestionnaireIdRequest, IEnumerable<ResponseViewModel>>
         {
             private readonly IGetAllResponsesByQuestionnaireIdQuery getAllResponsesByQuestionnaireIdQuery;
-            private readonly IMapper mapper;
+            private readonly IResponseViewModelBuilder responseViewModelBuilder;
 
-            public GetResponsesByQuestionnaireIdRequestHandler(
-                IGetAllResponsesByQuestionnaireIdQuery getAllResponsesByQuestionnaireIdQuery,
-                IMapper mapper)
+            public GetResponsesByQuestionnaireIdRequestHandler(IGetAllResponsesByQuestionnaireIdQuery getAllResponsesByQuestionnaireIdQuery, IResponseViewModelBuilder responseViewModelBuilder)
             {
                 this.getAllResponsesByQuestionnaireIdQuery = getAllResponsesByQuestionnaireIdQuery;
-                this.mapper = mapper;
+                this.responseViewModelBuilder = responseViewModelBuilder;
             }
 
-            public Task<List<ResponseViewModel>> Handle(GetResponsesByQuestionnaireIdRequest request, CancellationToken cancellationToken)
+            public Task<IEnumerable<ResponseViewModel>> Handle(GetResponsesByQuestionnaireIdRequest request, CancellationToken cancellationToken)
             {
                 var responses = getAllResponsesByQuestionnaireIdQuery.Execute(request.QuestionnaireId);
-                var responseViewModels = mapper.Map<List<ResponseViewModel>>(responses);
+                var responseViewModels = responseViewModelBuilder.BuildResponseViewModels(responses);
                 return Task.FromResult(responseViewModels);
             }
         }

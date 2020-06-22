@@ -1,1 +1,21 @@
-<p>response works!</p>
+<div *ngIf="response" class="response">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Questionnaire: {{questionnaireName}}</mat-card-title>
+            <mat-card-title>Name: {{response.completedByUser.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div *ngFor="let section of response.sections">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>{{section.sectionName}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <answer *ngFor="let answer of section.answers" [answer]="answer"></answer>
+                    </mat-card-content>
+                </mat-card>
+                <br />
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

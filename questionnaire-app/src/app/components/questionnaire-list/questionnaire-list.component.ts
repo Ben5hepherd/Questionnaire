@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import ResponseService from '../../services/response.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import QuestionnaireViewModel from 'src/app/view_models/questionnaire-view-model';
 
 @Component({
   selector: 'app-questionnaire-list',
@@ -14,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class QuestionnaireListComponent implements OnInit {
 
   questionnairesList: QuestionnaireListViewModel[] = [];
-  displayedColumns: string[] = ['id', 'name', 'createdDate', 'viewButton', 'responseButton'];
+  displayedColumns: string[] = ['id', 'name', 'createdDate', 'viewButton', 'responseButton', 'responseListButton'];
 
   constructor(
     private questionnaireService: QuestionnaireService,
@@ -60,10 +61,14 @@ export class QuestionnaireListComponent implements OnInit {
 
   addResponse(questionnaireId: number) {
     var model = { QuestionnaireId: questionnaireId };
-    this.responseService.post(model).subscribe(result => this.viewResponse(result));
+    this.responseService.post(model).subscribe(responseId => this.viewResponse(responseId));
   }
 
   viewResponse(responseId: number) {
     return this.router.navigateByUrl('/response/' + responseId);
+  }
+
+  viewResponses(questionnaireId: number) {
+    return this.router.navigateByUrl('/response-list/' + questionnaireId);
   }
 }

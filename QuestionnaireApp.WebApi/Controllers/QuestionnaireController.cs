@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuestionnaireApp.WebApi.Requests.QuestionnaireRequests;
@@ -15,9 +16,10 @@ namespace QuestionnaireApp.WebApi.Controllers
         public QuestionnaireController(IMediator mediator) => this.mediator = mediator;
 
         [HttpGet]
-        public ICollection<QuestionnaireListViewModel> Get()
+        public async Task<ICollection<QuestionnaireListViewModel>> Get()
         {
-            return mediator.Send(new GetAllQuestionnairesRequest()).Result;
+            //Made async to test spinner functionality on the front-end
+            return await mediator.Send(new GetAllQuestionnairesRequest());
         }
 
         [HttpGet("{questionnaireId}")]

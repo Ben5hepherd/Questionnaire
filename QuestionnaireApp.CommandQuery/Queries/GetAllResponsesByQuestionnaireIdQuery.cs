@@ -19,8 +19,10 @@ namespace QuestionnaireApp.CommandQuery.Queries
         {
             return dataContext.Responses
                 .Where(r => r.Questionnaire.Id == questionnaireId)
+                .Include(r => r.CompletedByUser)
                 .Include(r => r.Answers)
-                .ThenInclude(a => a.Question);
+                    .ThenInclude(a => a.Question)
+                    .ThenInclude(q => q.Section);
         }
     }
 }

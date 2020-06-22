@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import UserViewModel from '../view_models/user-view-model';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  public currentUser: UserViewModel;
-  public bearerToken: string;
+  public currentUserEmail: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   registerUser(model) {
     return this.httpClient.post<number>('http://localhost:4400/api/user', model);
@@ -18,14 +18,21 @@ export class AuthenticationService {
 
   loginUser(model) {
     return this.httpClient.post<any>('http://localhost:4400/api/login', model).subscribe(result => {
-      this.bearerToken = result.token;
-      this.currentUser = new UserViewModel();
-      this.currentUser.name = model.Name;
-      this.currentUser.email = model.Email;
+      localStorage.setItem('current-user-email', model.Email);
+      localStorage.setItem('bearer-token', result.token);
+
+      this.setCurrentUserEmail();
+
+      return this.router.navigateByUrl('/questionnaire-list');
     });
   }
 
   logout() {
-    this.currentUser = null;
+    localStorage.clear();
+    this.currentUserEmail = null;
+  }
+
+  public setCurrentUserEmail() {
+    this.currentUserEmail = localStorage.getItem('current-user-email');
   }
 }

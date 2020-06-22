@@ -1,0 +1,7 @@
+<div *ngIf="answer">
+    <h4>{{answer.question.text}}</h4>
+    <mat-form-field>
+        <mat-label>Type answer here</mat-label>
+        <input matInput [(ngModel)]="answer.text" (change)=" updateAnswer()">
+    </mat-form-field>
+</div>

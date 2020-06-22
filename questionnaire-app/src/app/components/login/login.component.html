@@ -1,63 +1,64 @@
 <h2 class="login-title">Login or register an account</h2>
 
-<div class="login-card">
-    <mat-card class="login-form">
-        <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div>
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input matInput [(ngModel)]="loginEmail">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <mat-label>Password</mat-label>
-                    <input matInput [(ngModel)]="loginPassword">
-                </mat-form-field>
-            </div>
-            <div>
-                <button mat-raised-button color="primary" (click)="login()">Login</button>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
-<br />
-<div class="login-card">
-    <mat-card class="login-form">
-        <mat-card-header>
-            <mat-card-title>Register an account</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div>
-                <mat-form-field>
-                    <mat-label>Name</mat-label>
-                    <input matInput [(ngModel)]="registerName">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input matInput [(ngModel)]="registerEmail">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <mat-label>Password</mat-label>
-                    <input matInput [(ngModel)]="registerPassword">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <mat-label>Confirm Password</mat-label>
-                    <input matInput [(ngModel)]="registerPasswordConfirmation">
-                </mat-form-field>
-            </div>
-            <div>
-                <button mat-raised-button color="primary" (click)="register()">Register</button>
-            </div>
-        </mat-card-content>
-    </mat-card>
+<div class="login-cards">
+    <div class="login-card">
+        <mat-card class="login-form">
+            <mat-card-header class="header">
+                <mat-card-title>Login</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="loginEmail">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput [(ngModel)]="loginPassword">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" (click)="login()">Login</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="login-card" *ngIf="showRegisterAccount">
+        <mat-card class="login-form">
+            <mat-card-header class="header">
+                <mat-card-title>Register an account</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput [(ngModel)]="registerName">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="registerEmail">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput [(ngModel)]="registerPassword">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Confirm Password</mat-label>
+                        <input type="password" matInput [(ngModel)]="registerPasswordConfirmation">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" (click)="register()">Register</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

@@ -17,16 +17,23 @@
             <td mat-cell *matCellDef="let questionnaire"> {{questionnaire.createdDate}} </td>
         </ng-container>
         <ng-container matColumnDef="viewButton">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>*</th>
             <td mat-cell *matCellDef="let questionnaire">
-                <button mat-button color="primary" (click)="viewQuestionnaire(questionnaire.id)">View</button>
+                <button mat-button color="primary" (click)="viewQuestionnaire(questionnaire.id)">View
+                    Questionnaire</button>
             </td>
         </ng-container>
         <ng-container matColumnDef="responseButton">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>**</th>
             <td mat-cell *matCellDef="let questionnaire">
                 <button mat-button color="primary" (click)="addResponse(questionnaire.id)"
-                    *ngIf="this.authenticationService.currentUser">Respond</button>
+                    *ngIf="this.authenticationService.currentUserEmail">Add Response</button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="responseListButton">
+            <th mat-header-cell *matHeaderCellDef>***</th>
+            <td mat-cell *matCellDef="let questionnaire">
+                <button mat-button color="primary" (click)="viewResponses(questionnaire.id)">View Responses</button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

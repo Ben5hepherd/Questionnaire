@@ -1,6 +1,6 @@
 <h3>{{name}}</h3>
 <div *ngFor="let question of orderedQuestions">
-    {{question.ordinal}}. {{question.text}}
+    {{question.ordinal + 1}}. {{question.text}}
 </div>
 <div *ngIf="!orderedQuestions || orderedQuestions.length === 0" class="no-questions">
     <strong>No questions for this section yet!</strong>
