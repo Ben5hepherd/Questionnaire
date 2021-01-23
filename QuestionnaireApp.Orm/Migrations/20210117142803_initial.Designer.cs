@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuestionnaireApp.Orm;
@@ -9,19 +10,22 @@ using QuestionnaireApp.Orm;
 namespace QuestionnaireApp.Orm.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200531161053_initial")]
+    [Migration("20210117142803_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113");
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("QuestionnaireApp.Domain.Answer", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("QuestionId");
 
@@ -41,7 +45,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Question", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Ordinal");
 
@@ -63,7 +68,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Questionnaire", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CreatedByUserId");
 
@@ -81,7 +87,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Response", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CompletedByUserId");
 
@@ -99,7 +106,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Section", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
@@ -117,7 +125,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email");
 
@@ -137,7 +146,7 @@ namespace QuestionnaireApp.Orm.Migrations
                         .HasForeignKey("QuestionId");
 
                     b.HasOne("QuestionnaireApp.Domain.Response", "Response")
-                        .WithMany()
+                        .WithMany("Answers")
                         .HasForeignKey("ResponseId");
                 });
 
@@ -149,7 +158,7 @@ namespace QuestionnaireApp.Orm.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("QuestionnaireApp.Domain.Section", "Section")
-                        .WithMany()
+                        .WithMany("Questions")
                         .HasForeignKey("SectionId");
                 });
 
@@ -174,7 +183,7 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Section", b =>
                 {
                     b.HasOne("QuestionnaireApp.Domain.Questionnaire", "Questionnaire")
-                        .WithMany()
+                        .WithMany("Sections")
                         .HasForeignKey("QuestionnaireId");
                 });
 #pragma warning restore 612, 618

@@ -11,7 +11,7 @@ namespace QuestionnaireApp.Orm
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-9IURL9P\\SQLEXPRESS; Database=Questionnaire; Trusted_Connection=True;");
         }
 
         public DbSet<Answer> Answers { get; set; }
@@ -23,12 +23,12 @@ namespace QuestionnaireApp.Orm
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Answer>().ToTable("Answers");
-            modelBuilder.Entity<Question>().ToTable("Questions");
-            modelBuilder.Entity<Questionnaire>().ToTable("Questionnaires");
-            modelBuilder.Entity<Section>().ToTable("Sections");
-            modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<Response>().ToTable("Response");
+            modelBuilder.Entity<Answer>().ToTable("Answers").Property(f => f.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Question>().ToTable("Questions").Property(f => f.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Questionnaire>().ToTable("Questionnaires").Property(f => f.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Section>().ToTable("Sections").Property(f => f.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>().ToTable("Users").Property(f => f.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Response>().ToTable("Response").Property(f => f.Id).ValueGeneratedOnAdd();
         }
     }
 }

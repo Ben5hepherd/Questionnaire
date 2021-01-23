@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuestionnaireApp.Orm;
 
@@ -14,12 +15,15 @@ namespace QuestionnaireApp.Orm.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113");
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("QuestionnaireApp.Domain.Answer", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("QuestionId");
 
@@ -39,7 +43,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Question", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Ordinal");
 
@@ -61,7 +66,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Questionnaire", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CreatedByUserId");
 
@@ -79,7 +85,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.Response", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CompletedByUserId");
 
@@ -91,13 +98,14 @@ namespace QuestionnaireApp.Orm.Migrations
 
                     b.HasIndex("QuestionnaireId");
 
-                    b.ToTable("Responses");
+                    b.ToTable("Response");
                 });
 
             modelBuilder.Entity("QuestionnaireApp.Domain.Section", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
@@ -115,7 +123,8 @@ namespace QuestionnaireApp.Orm.Migrations
             modelBuilder.Entity("QuestionnaireApp.Domain.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email");
 

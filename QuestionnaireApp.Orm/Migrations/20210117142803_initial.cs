@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QuestionnaireApp.Orm.Migrations
@@ -12,7 +13,7 @@ namespace QuestionnaireApp.Orm.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     EncryptedPassword = table.Column<string>(nullable: true)
@@ -27,7 +28,7 @@ namespace QuestionnaireApp.Orm.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     CreatedByUserId = table.Column<int>(nullable: true)
@@ -48,7 +49,7 @@ namespace QuestionnaireApp.Orm.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CompletedByUserId = table.Column<int>(nullable: true),
                     QuestionnaireId = table.Column<int>(nullable: true)
                 },
@@ -74,7 +75,7 @@ namespace QuestionnaireApp.Orm.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Ordinal = table.Column<int>(nullable: false),
                     QuestionnaireId = table.Column<int>(nullable: true)
@@ -95,7 +96,7 @@ namespace QuestionnaireApp.Orm.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
                     Ordinal = table.Column<int>(nullable: false),
                     SectionId = table.Column<int>(nullable: true),
@@ -123,7 +124,7 @@ namespace QuestionnaireApp.Orm.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
                     QuestionId = table.Column<int>(nullable: true),
                     ResponseId = table.Column<int>(nullable: true)
