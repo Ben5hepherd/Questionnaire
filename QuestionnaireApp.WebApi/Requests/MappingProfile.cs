@@ -9,7 +9,8 @@ namespace QuestionnaireApp.WebApi.Requests
         public MappingProfile()
         {
             CreateMap<User, UserViewModel>();
-            CreateMap<Questionnaire, QuestionnaireListViewModel>();
+            CreateMap<Questionnaire, QuestionnaireListViewModel>()
+                .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => (src.CreatedDate).ToLongDateString()));
             CreateMap<Questionnaire, QuestionnaireViewModel>();
             CreateMap<Section, SectionViewModel>();
             CreateMap<Question, QuestionViewModel>();

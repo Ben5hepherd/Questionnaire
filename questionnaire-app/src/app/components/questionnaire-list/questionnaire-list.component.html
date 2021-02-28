@@ -1,8 +1,8 @@
 <div class="add-questionnaire-button">
-    <button mat-raised-button color="primary" (click)="addQuestionnaire()">Add Questionnaire!</button>
+    <button *ngIf="authenticationService.isUserAdmin" mat-raised-button color="primary" (click)="addQuestionnaire()">Add Questionnaire!</button>
 </div>
 <div class="questionnaires-table">
-    <table *ngIf="questionnairesList.length" mat-table [dataSource]="questionnairesList"
+    <table mat-table [dataSource]="dataSource"
         class="mat-elevation-z8 content">
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -14,24 +14,24 @@
         </ng-container>
         <ng-container matColumnDef="createdDate">
             <th mat-header-cell *matHeaderCellDef> Created Date </th>
-            <td mat-cell *matCellDef="let questionnaire"> {{questionnaire.createdDate}} </td>
+            <td mat-cell *matCellDef="let questionnaire"> {{questionnaire.createdDate | date: 'dd/MM/yyyy'}} </td>
         </ng-container>
         <ng-container matColumnDef="viewButton">
-            <th mat-header-cell *matHeaderCellDef>*</th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let questionnaire">
                 <button mat-button color="primary" (click)="viewQuestionnaire(questionnaire.id)">View
                     Questionnaire</button>
             </td>
         </ng-container>
         <ng-container matColumnDef="responseButton">
-            <th mat-header-cell *matHeaderCellDef>**</th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let questionnaire">
                 <button mat-button color="primary" (click)="addResponse(questionnaire.id)"
                     *ngIf="this.authenticationService.currentUserEmail">Add Response</button>
             </td>
         </ng-container>
         <ng-container matColumnDef="responseListButton">
-            <th mat-header-cell *matHeaderCellDef>***</th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let questionnaire">
                 <button mat-button color="primary" (click)="viewResponses(questionnaire.id)">View Responses</button>
             </td>

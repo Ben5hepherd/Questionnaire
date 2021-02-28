@@ -36,7 +36,7 @@ namespace QuestionnaireApp.WebApi.Controllers
             if (user != null)
             {
                 var tokenString = GenerateJSONWebToken(user);
-                response = Ok(new { token = tokenString });
+                response = Ok(new { token = tokenString, isAdmin = user.IsAdmin });
             }
 
             return response;

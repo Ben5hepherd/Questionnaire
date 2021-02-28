@@ -3,11 +3,11 @@
     <div class="menu-item">
         <button mat-button class="home-menu-item" (click)="navigateToHome()">Home</button>
     </div>
-    <div class="login-menu-item" *ngIf="!this.authenticationService.currentUserEmail">
+    <div class="login-menu-item" *ngIf="!authenticationService.currentUserEmail">
         <button mat-button class="login-menu-item" (click)="navigateToLogin()">Login</button>
     </div>
-    <div class="login-menu-item" *ngIf="this.authenticationService.currentUserEmail">
-        <button mat-button class="login-menu-item" (click)="this.authenticationService.logout()">Logged in as
-            {{this.authenticationService.currentUserEmail}} | Logout</button>
+    <div class="login-menu-item" *ngIf="authenticationService.currentUserEmail">
+        <button mat-button class="login-menu-item" (click)="authenticationService.logout()">Logged in as
+            {{authenticationService.currentUserEmail}} | Logout</button>
     </div>
 </div>

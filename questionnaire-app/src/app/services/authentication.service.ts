@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class AuthenticationService {
 
   public currentUserEmail: string;
+  public isUserAdmin: boolean;
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -19,10 +20,10 @@ export class AuthenticationService {
 
   loginUser(model) {
     return this.httpClient.post<any>(environment.url + '/api/login', model).subscribe(result => {
-      localStorage.setItem('current-user-email', model.Email);
       localStorage.setItem('bearer-token', result.token);
-
-      this.setCurrentUserEmail();
+      
+      this.currentUserEmail = model.Email;
+      this.isUserAdmin = result.isAdmin;
 
       return this.router.navigateByUrl('/questionnaire-list');
     });
@@ -31,9 +32,6 @@ export class AuthenticationService {
   logout() {
     localStorage.clear();
     this.currentUserEmail = null;
-  }
-
-  public setCurrentUserEmail() {
-    this.currentUserEmail = localStorage.getItem('current-user-email');
+    this.isUserAdmin = null;
   }
 }
