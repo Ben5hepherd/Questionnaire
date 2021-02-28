@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuestionnaireApp.WebApi.Requests.QuestionRequests;
 
@@ -13,6 +14,7 @@ namespace QuestionnaireApp.WebApi.Controllers
         public QuestionController(IMediator mediator) => this.mediator = mediator;
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public int Post(AddQuestionModel model)
         {
             return mediator.Send(new AddQuestionRequest() { Model = model }).Result;

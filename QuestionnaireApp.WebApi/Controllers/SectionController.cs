@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuestionnaireApp.WebApi.Requests.SectionRequests;
 
@@ -13,6 +14,7 @@ namespace QuestionnaireApp.WebApi.Controllers
         public SectionController(IMediator mediator) => this.mediator = mediator;
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public int Post(AddSectionModel model)
         {
             return mediator.Send(new AddSectionRequest() { Model = model }).Result;

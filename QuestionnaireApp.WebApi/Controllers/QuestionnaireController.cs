@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuestionnaireApp.WebApi.Requests.QuestionnaireRequests;
 using QuestionnaireApp.WebApi.ViewModels;
@@ -29,6 +30,7 @@ namespace QuestionnaireApp.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public int Post(AddQuestionnaireModel model)
         {
             return mediator.Send(new AddQuestionnaireRequest { Model = model }).Result;

@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using QuestionnaireApp.WebApi.Requests.UserRequests;
 using QuestionnaireApp.WebApi.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -46,11 +47,15 @@ namespace QuestionnaireApp.WebApi.Controllers
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[] {
+            var claims = new List<Claim>()
+            {
                 new Claim(JwtRegisteredClaimNames.Sid, userInfo.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, userInfo.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
+            if (userInfo.IsAdmin)
+                claims.Add(new Claim("roles", "Admin"));
 
             var token = new JwtSecurityToken(configuration["Jwt:Issuer"],
                 configuration["Jwt:Issuer"],
