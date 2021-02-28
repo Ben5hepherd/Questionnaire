@@ -11,7 +11,7 @@ namespace QuestionnaireApp.Orm
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-9IURL9P\\SQLEXPRESS; Database=Questionnaire; Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(xxxxx);
         }
 
         public DbSet<Answer> Answers { get; set; }
