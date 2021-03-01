@@ -9,8 +9,8 @@ import { environment } from '../../environments/environment';
 })
 export class AuthenticationService {
 
-  public currentUserEmail: string;
-  public isUserAdmin: boolean;
+  isUserAdmin: boolean;
+  currentUserEmail: string;
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -27,6 +27,16 @@ export class AuthenticationService {
 
       return this.router.navigateByUrl('/questionnaire-list');
     });
+  }
+
+  setUserDetails() {
+    let bearerToken = localStorage.getItem('bearer-token');
+    if(bearerToken) {
+      this.httpClient.get<UserViewModel>(environment.url + '/api/user/loggedInUser').subscribe((res: UserViewModel) => {
+        this.isUserAdmin = res.isAdmin;
+        this.currentUserEmail = res.email;
+      })
+    }
   }
 
   logout() {

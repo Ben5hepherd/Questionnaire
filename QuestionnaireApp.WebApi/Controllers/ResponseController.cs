@@ -31,6 +31,7 @@ namespace QuestionnaireApp.WebApi.Controllers
         }
 
         [HttpGet("GetResponsesByQuestionnaireId/{questionnaireId}")]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<ResponseViewModel> GetResponsesByQuestionnaireId(int questionnaireId)
         {
             return mediator.Send(new GetResponsesByQuestionnaireIdRequest { QuestionnaireId = questionnaireId }).Result;

@@ -3,7 +3,7 @@
         <mat-card-title>{{name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <div class="action-buttons">
+        <div class="action-buttons" *ngIf="authenticationService.isUserAdmin">
             <div class="add-section-button">
                 <button mat-raised-button color="primary" (click)="openAddSectionDialog()">Add Section</button>
             </div>

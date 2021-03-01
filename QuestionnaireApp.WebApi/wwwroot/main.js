@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"add-questionnaire-button\">\r\n    <button *ngIf=\"authenticationService.isUserAdmin\" mat-raised-button color=\"primary\" (click)=\"addQuestionnaire()\">Add Questionnaire!</button>\r\n</div>\r\n<div class=\"questionnaires-table\">\r\n    <table mat-table [dataSource]=\"dataSource\"\r\n        class=\"mat-elevation-z8 content\">\r\n        <ng-container matColumnDef=\"id\">\r\n            <th mat-header-cell *matHeaderCellDef> ID </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.id}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"name\">\r\n            <th mat-header-cell *matHeaderCellDef> Name </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.name}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"createdDate\">\r\n            <th mat-header-cell *matHeaderCellDef> Created Date </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.createdDate | date: 'dd/MM/yyyy'}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"viewButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"viewQuestionnaire(questionnaire.id)\">View\r\n                    Questionnaire</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"addResponse(questionnaire.id)\"\r\n                    *ngIf=\"this.authenticationService.currentUserEmail\">Add Response</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseListButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"viewResponses(questionnaire.id)\">View Responses</button>\r\n            </td>\r\n        </ng-container>\r\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n    </table>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"add-questionnaire-button\">\r\n    <button *ngIf=\"authenticationService.isUserAdmin\" mat-raised-button color=\"primary\" (click)=\"addQuestionnaire()\">Add Questionnaire!</button>\r\n</div>\r\n<div class=\"questionnaires-table\">\r\n    <table mat-table [dataSource]=\"dataSource\"\r\n        class=\"mat-elevation-z8 content\">\r\n        <ng-container matColumnDef=\"id\">\r\n            <th mat-header-cell *matHeaderCellDef> ID </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.id}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"name\">\r\n            <th mat-header-cell *matHeaderCellDef> Name </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.name}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"createdDate\">\r\n            <th mat-header-cell *matHeaderCellDef> Created Date </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.createdDate | date: 'dd/MM/yyyy'}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"viewButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"viewQuestionnaire(questionnaire.id)\">View\r\n                    Questionnaire</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"addResponse(questionnaire.id)\" *ngIf=\"authenticationService.currentUserEmail\">Add Response</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseListButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" *ngIf=\"authenticationService.isUserAdmin\" (click)=\"viewResponses(questionnaire.id)\">View Responses</button>\r\n            </td>\r\n        </ng-container>\r\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n    </table>\r\n</div>");
 
 /***/ }),
 
@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-card>\r\n    <mat-card-header>\r\n        <mat-card-title>{{name}}</mat-card-title>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n        <div class=\"action-buttons\">\r\n            <div class=\"add-section-button\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"openAddSectionDialog()\">Add Section</button>\r\n            </div>\r\n            <div class=\"add-question-button\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"openAddQuestionDialog()\">Add Question</button>\r\n            </div>\r\n        </div>\r\n        <div *ngFor=\"let section of orderedSections\">\r\n            <section [name]=\"section.name\" [questions]=\"section.questions\"></section>\r\n            <br />\r\n            <hr>\r\n        </div>\r\n    </mat-card-content>\r\n</mat-card>");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-card>\r\n    <mat-card-header>\r\n        <mat-card-title>{{name}}</mat-card-title>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n        <div class=\"action-buttons\" *ngIf=\"authenticationService.isUserAdmin\">\r\n            <div class=\"add-section-button\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"openAddSectionDialog()\">Add Section</button>\r\n            </div>\r\n            <div class=\"add-question-button\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"openAddQuestionDialog()\">Add Question</button>\r\n            </div>\r\n        </div>\r\n        <div *ngFor=\"let section of orderedSections\">\r\n            <section [name]=\"section.name\" [questions]=\"section.questions\"></section>\r\n            <br />\r\n            <hr>\r\n        </div>\r\n    </mat-card-content>\r\n</mat-card>");
 
 /***/ }),
 
@@ -492,17 +492,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _services_loading_spinner_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/loading-spinner.service */ "./src/app/services/loading-spinner.service.ts");
+/* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/authentication.service */ "./src/app/services/authentication.service.ts");
+
 
 
 
 let AppComponent = class AppComponent {
-    constructor(loadingSpinnerService) {
+    constructor(loadingSpinnerService, authenticationService) {
         this.loadingSpinnerService = loadingSpinnerService;
+        this.authenticationService = authenticationService;
         this.title = 'questionnaire-app';
+    }
+    ngOnInit() {
+        this.authenticationService.setUserDetails();
     }
 };
 AppComponent.ctorParameters = () => [
-    { type: _services_loading_spinner_service__WEBPACK_IMPORTED_MODULE_2__["LoadingSpinnerService"] }
+    { type: _services_loading_spinner_service__WEBPACK_IMPORTED_MODULE_2__["LoadingSpinnerService"] },
+    { type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1099,6 +1106,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_section_dialog_add_section_dialog_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../add-section-dialog/add-section-dialog.component */ "./src/app/components/add-section-dialog/add-section-dialog.component.ts");
 /* harmony import */ var src_app_view_models_section_view_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/view_models/section-view-model */ "./src/app/view_models/section-view-model.ts");
 /* harmony import */ var src_app_services_section_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/services/section.service */ "./src/app/services/section.service.ts");
+/* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/authentication.service */ "./src/app/services/authentication.service.ts");
+
 
 
 
@@ -1111,11 +1120,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let QuestionnaireComponent = class QuestionnaireComponent {
-    constructor(route, questionnaireService, questionService, sectionService, dialog) {
+    constructor(route, questionnaireService, questionService, sectionService, authenticationService, dialog) {
         this.route = route;
         this.questionnaireService = questionnaireService;
         this.questionService = questionService;
         this.sectionService = sectionService;
+        this.authenticationService = authenticationService;
         this.dialog = dialog;
     }
     ngOnInit() {
@@ -1190,6 +1200,7 @@ QuestionnaireComponent.ctorParameters = () => [
     { type: src_app_services_questionnaire_service__WEBPACK_IMPORTED_MODULE_3__["default"] },
     { type: src_app_services_question_service__WEBPACK_IMPORTED_MODULE_4__["default"] },
     { type: src_app_services_section_service__WEBPACK_IMPORTED_MODULE_10__["SectionService"] },
+    { type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_11__["AuthenticationService"] },
     { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] }
 ];
 QuestionnaireComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1512,6 +1523,15 @@ let AuthenticationService = class AuthenticationService {
             this.isUserAdmin = result.isAdmin;
             return this.router.navigateByUrl('/questionnaire-list');
         });
+    }
+    setUserDetails() {
+        let bearerToken = localStorage.getItem('bearer-token');
+        if (bearerToken) {
+            this.httpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url + '/api/user/loggedInUser').subscribe((res) => {
+                this.isUserAdmin = res.isAdmin;
+                this.currentUserEmail = res.email;
+            });
+        }
     }
     logout() {
         localStorage.clear();

@@ -9,6 +9,7 @@ import { AddQuestionDialogComponent } from '../add-question-dialog/add-question-
 import { AddSectionDialogComponent } from '../add-section-dialog/add-section-dialog.component';
 import SectionViewModel from 'src/app/view_models/section-view-model';
 import { SectionService } from 'src/app/services/section.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-questionnaire',
@@ -27,6 +28,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
     private questionnaireService: QuestionnaireService,
     private questionService: QuestionService,
     private sectionService: SectionService,
+    private authenticationService: AuthenticationService,
     public dialog: MatDialog
   ) { }
 
