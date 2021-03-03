@@ -34,6 +34,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ResponseListComponent } from './components/response-list/response-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AddQuestionnaireDialogComponent } from './components/add-questionnaire-dialog/add-questionnaire-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     LoginComponent,
     BannerComponent,
     AnswerComponent,
-    ResponseListComponent
+    ResponseListComponent,
+    AddQuestionnaireDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +83,10 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AddSectionDialogComponent, AddQuestionDialogComponent]
+  entryComponents: [
+    AddSectionDialogComponent,
+    AddQuestionDialogComponent,
+    AddQuestionnaireDialogComponent
+  ]
 })
 export class AppModule { }

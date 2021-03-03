@@ -7,6 +7,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import QuestionnaireViewModel from 'src/app/view_models/questionnaire-view-model';
 import { MatTableDataSource } from '../../../../node_modules/@angular/material/table';
+import { AddQuestionnaireDialogComponent, AddQuestionnaireModel } from '../add-questionnaire-dialog/add-questionnaire-dialog.component';
+import { MatDialog } from '../../../../node_modules/@angular/material/dialog';
 
 @Component({
   selector: 'app-questionnaire-list',
@@ -22,7 +24,8 @@ export class QuestionnaireListComponent implements OnInit {
     private questionnaireService: QuestionnaireService,
     private responseService: ResponseService,
     private authenticationService: AuthenticationService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.questionnaireService.getAll().subscribe(questionnairesReturned => {
@@ -39,10 +42,23 @@ export class QuestionnaireListComponent implements OnInit {
     });
   }
 
-  addQuestionnaire() {
+  openAddQuestionnaireDialog() {
+    const dialogRef = this.dialog.open(AddQuestionnaireDialogComponent, {
+      width: '250px',
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe((result: AddQuestionnaireModel) => {
+      if (result) {
+        this.addQuestionnaire(result.name);
+      }
+    });
+  }
+
+  addQuestionnaire(name: string) {
     var model = {
       CreatedByUserId: 1,
-      Name: "Test Questionnaire"
+      Name: name
     };
 
     let questionnaireToAddToList = new QuestionnaireListViewModel();

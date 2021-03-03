@@ -1,5 +1,5 @@
 <div class="add-questionnaire-button">
-    <button *ngIf="authenticationService.isUserAdmin" mat-raised-button color="primary" (click)="addQuestionnaire()">Add Questionnaire!</button>
+    <button *ngIf="authenticationService.isUserAdmin" mat-raised-button color="primary" (click)="openAddQuestionnaireDialog()">Add Questionnaire!</button>
 </div>
 <div class="questionnaires-table">
     <table mat-table [dataSource]="dataSource"

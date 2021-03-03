@@ -49,6 +49,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.html":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.html ***!
+  \***********************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 mat-dialog-title>Add a new questionnaire</h1>\n<div mat-dialog-content>\n    <mat-form-field>\n        <mat-label>Name</mat-label>\n        <input matInput [(ngModel)]=\"data.name\">\n    </mat-form-field>\n</div>\n<div mat-dialog-actions>\n    <button mat-raised-button color=\"secondary\" (click)=\"onNoClick()\">Cancel</button>\n    <button mat-raised-button color=\"primary\" [mat-dialog-close]=\"data\" cdkFocusInitial>Add</button>\n</div>");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/add-section-dialog/add-section-dialog.component.html":
 /*!***********************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/add-section-dialog/add-section-dialog.component.html ***!
@@ -110,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"add-questionnaire-button\">\r\n    <button *ngIf=\"authenticationService.isUserAdmin\" mat-raised-button color=\"primary\" (click)=\"addQuestionnaire()\">Add Questionnaire!</button>\r\n</div>\r\n<div class=\"questionnaires-table\">\r\n    <table mat-table [dataSource]=\"dataSource\"\r\n        class=\"mat-elevation-z8 content\">\r\n        <ng-container matColumnDef=\"id\">\r\n            <th mat-header-cell *matHeaderCellDef> ID </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.id}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"name\">\r\n            <th mat-header-cell *matHeaderCellDef> Name </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.name}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"createdDate\">\r\n            <th mat-header-cell *matHeaderCellDef> Created Date </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.createdDate | date: 'dd/MM/yyyy'}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"viewButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"viewQuestionnaire(questionnaire.id)\">View\r\n                    Questionnaire</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"addResponse(questionnaire.id)\" *ngIf=\"authenticationService.currentUserEmail\">Add Response</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseListButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" *ngIf=\"authenticationService.isUserAdmin\" (click)=\"viewResponses(questionnaire.id)\">View Responses</button>\r\n            </td>\r\n        </ng-container>\r\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n    </table>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"add-questionnaire-button\">\r\n    <button *ngIf=\"authenticationService.isUserAdmin\" mat-raised-button color=\"primary\" (click)=\"openAddQuestionnaireDialog()\">Add Questionnaire!</button>\r\n</div>\r\n<div class=\"questionnaires-table\">\r\n    <table mat-table [dataSource]=\"dataSource\"\r\n        class=\"mat-elevation-z8 content\">\r\n        <ng-container matColumnDef=\"id\">\r\n            <th mat-header-cell *matHeaderCellDef> ID </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.id}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"name\">\r\n            <th mat-header-cell *matHeaderCellDef> Name </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.name}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"createdDate\">\r\n            <th mat-header-cell *matHeaderCellDef> Created Date </th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\"> {{questionnaire.createdDate | date: 'dd/MM/yyyy'}} </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"viewButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"viewQuestionnaire(questionnaire.id)\">View\r\n                    Questionnaire</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" (click)=\"addResponse(questionnaire.id)\" *ngIf=\"authenticationService.currentUserEmail\">Add Response</button>\r\n            </td>\r\n        </ng-container>\r\n        <ng-container matColumnDef=\"responseListButton\">\r\n            <th mat-header-cell *matHeaderCellDef></th>\r\n            <td mat-cell *matCellDef=\"let questionnaire\">\r\n                <button mat-button color=\"primary\" *ngIf=\"authenticationService.isUserAdmin\" (click)=\"viewResponses(questionnaire.id)\">View Responses</button>\r\n            </td>\r\n        </ng-container>\r\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n    </table>\r\n</div>");
 
 /***/ }),
 
@@ -566,6 +579,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_response_list_response_list_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/response-list/response-list.component */ "./src/app/components/response-list/response-list.component.ts");
 /* harmony import */ var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @angular/material/expansion */ "./node_modules/@angular/material/esm2015/expansion.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _components_add_questionnaire_dialog_add_questionnaire_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/add-questionnaire-dialog/add-questionnaire-dialog.component */ "./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.ts");
+
 
 
 
@@ -615,7 +630,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _components_login_login_component__WEBPACK_IMPORTED_MODULE_23__["LoginComponent"],
             _components_banner_banner_component__WEBPACK_IMPORTED_MODULE_25__["BannerComponent"],
             _components_answer_answer_component__WEBPACK_IMPORTED_MODULE_27__["AnswerComponent"],
-            _components_response_list_response_list_component__WEBPACK_IMPORTED_MODULE_30__["ResponseListComponent"]
+            _components_response_list_response_list_component__WEBPACK_IMPORTED_MODULE_30__["ResponseListComponent"],
+            _components_add_questionnaire_dialog_add_questionnaire_dialog_component__WEBPACK_IMPORTED_MODULE_33__["AddQuestionnaireDialogComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -649,7 +665,11 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
-        entryComponents: [_components_add_section_dialog_add_section_dialog_component__WEBPACK_IMPORTED_MODULE_21__["AddSectionDialogComponent"], _components_add_question_dialog_add_question_dialog_component__WEBPACK_IMPORTED_MODULE_15__["AddQuestionDialogComponent"]]
+        entryComponents: [
+            _components_add_section_dialog_add_section_dialog_component__WEBPACK_IMPORTED_MODULE_21__["AddSectionDialogComponent"],
+            _components_add_question_dialog_add_question_dialog_component__WEBPACK_IMPORTED_MODULE_15__["AddQuestionDialogComponent"],
+            _components_add_questionnaire_dialog_add_questionnaire_dialog_component__WEBPACK_IMPORTED_MODULE_33__["AddQuestionnaireDialogComponent"]
+        ]
     })
 ], AppModule);
 
@@ -707,6 +727,61 @@ AddQuestionDialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"]))
 ], AddQuestionDialogComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.scss":
+/*!*********************************************************************************************!*\
+  !*** ./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.scss ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYWRkLXF1ZXN0aW9ubmFpcmUtZGlhbG9nL2FkZC1xdWVzdGlvbm5haXJlLWRpYWxvZy5jb21wb25lbnQuc2NzcyJ9 */");
+
+/***/ }),
+
+/***/ "./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.ts":
+/*!*******************************************************************************************!*\
+  !*** ./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.ts ***!
+  \*******************************************************************************************/
+/*! exports provided: AddQuestionnaireDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddQuestionnaireDialogComponent", function() { return AddQuestionnaireDialogComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
+
+
+
+let AddQuestionnaireDialogComponent = class AddQuestionnaireDialogComponent {
+    constructor(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    onNoClick() {
+        this.dialogRef.close();
+    }
+};
+AddQuestionnaireDialogComponent.ctorParameters = () => [
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] },
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] }
+];
+AddQuestionnaireDialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-add-questionnaire-dialog',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./add-questionnaire-dialog.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./add-questionnaire-dialog.component.scss */ "./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"]))
+], AddQuestionnaireDialogComponent);
 
 
 
@@ -996,6 +1071,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_response_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/response.service */ "./src/app/services/response.service.ts");
 /* harmony import */ var src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/authentication.service */ "./src/app/services/authentication.service.ts");
 /* harmony import */ var _node_modules_angular_material_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../node_modules/@angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
+/* harmony import */ var _add_questionnaire_dialog_add_questionnaire_dialog_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../add-questionnaire-dialog/add-questionnaire-dialog.component */ "./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.ts");
+/* harmony import */ var _node_modules_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../node_modules/@angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
+
+
 
 
 
@@ -1005,11 +1084,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let QuestionnaireListComponent = class QuestionnaireListComponent {
-    constructor(questionnaireService, responseService, authenticationService, router) {
+    constructor(questionnaireService, responseService, authenticationService, router, dialog) {
         this.questionnaireService = questionnaireService;
         this.responseService = responseService;
         this.authenticationService = authenticationService;
         this.router = router;
+        this.dialog = dialog;
         this.dataSource = new _node_modules_angular_material_table__WEBPACK_IMPORTED_MODULE_7__["MatTableDataSource"]();
         this.displayedColumns = ['id', 'name', 'createdDate', 'viewButton', 'responseButton', 'responseListButton'];
     }
@@ -1026,10 +1106,21 @@ let QuestionnaireListComponent = class QuestionnaireListComponent {
             this.dataSource = new _node_modules_angular_material_table__WEBPACK_IMPORTED_MODULE_7__["MatTableDataSource"](questionnairesList);
         });
     }
-    addQuestionnaire() {
+    openAddQuestionnaireDialog() {
+        const dialogRef = this.dialog.open(_add_questionnaire_dialog_add_questionnaire_dialog_component__WEBPACK_IMPORTED_MODULE_8__["AddQuestionnaireDialogComponent"], {
+            width: '250px',
+            data: {}
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.addQuestionnaire(result.name);
+            }
+        });
+    }
+    addQuestionnaire(name) {
         var model = {
             CreatedByUserId: 1,
-            Name: "Test Questionnaire"
+            Name: name
         };
         let questionnaireToAddToList = new _view_models_questionnaire_list_view_model__WEBPACK_IMPORTED_MODULE_3__["default"]();
         questionnaireToAddToList.createdDate = new Date();
@@ -1058,7 +1149,8 @@ QuestionnaireListComponent.ctorParameters = () => [
     { type: _services_questionnaire_service__WEBPACK_IMPORTED_MODULE_2__["default"] },
     { type: _services_response_service__WEBPACK_IMPORTED_MODULE_5__["default"] },
     { type: src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _node_modules_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"] }
 ];
 QuestionnaireListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
