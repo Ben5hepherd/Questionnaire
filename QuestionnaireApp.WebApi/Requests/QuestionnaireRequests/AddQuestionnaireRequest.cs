@@ -3,6 +3,7 @@ using MediatR;
 using QuestionnaireApp.CommandQuery.Commands.Interfaces;
 using QuestionnaireApp.CommandQuery.Queries.Interfaces;
 using QuestionnaireApp.Domain;
+using QuestionnaireApp.WebApi.TimeProviders;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,11 +18,13 @@ namespace QuestionnaireApp.WebApi.Requests.QuestionnaireRequests
         {
             private readonly IAddEntityCommand AddEntityCommand;
             private readonly IGetEntityByIdQuery GetEntityByIdQuery;
+            private readonly ITimeProvider TimeProvider;
 
-            public AddQuestionnaireRequestHandler(IAddEntityCommand addEntityCommand, IGetEntityByIdQuery getEntityByIdQuery)
+            public AddQuestionnaireRequestHandler(IAddEntityCommand addEntityCommand, IGetEntityByIdQuery getEntityByIdQuery, ITimeProvider timeProvider)
             {
                 AddEntityCommand = addEntityCommand;
                 GetEntityByIdQuery = getEntityByIdQuery;
+                TimeProvider = timeProvider;
             }
 
             public Task<int> Handle(AddQuestionnaireRequest request, CancellationToken cancellationToken)
@@ -32,7 +35,7 @@ namespace QuestionnaireApp.WebApi.Requests.QuestionnaireRequests
                 var questionnaire = new Questionnaire
                 {
                     Name = model.Name,
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = TimeProvider.GetDateTimeNow(),
                     CreatedByUser = createdByUser
                 };
 

@@ -15,6 +15,7 @@ using QuestionnaireApp.CommandQuery.Queries;
 using QuestionnaireApp.CommandQuery.Queries.Interfaces;
 using QuestionnaireApp.Orm;
 using QuestionnaireApp.WebApi.Requests;
+using QuestionnaireApp.WebApi.TimeProviders;
 using QuestionnaireApp.WebApi.ViewModels.Builders;
 using QuestionnaireApp.WebApi.ViewModels.Builders.Interfaces;
 using System.Text;
@@ -81,6 +82,8 @@ namespace QuestionnaireApp.WebApi
             services.AddScoped<IAddEntityCommand, AddEntityCommand>();
             services.AddScoped<IUpdateEntityCommand, UpdateEntityCommand>();
             services.AddScoped<IDeleteEntityCommand, DeleteEntityCommand>();
+
+            services.AddScoped<ITimeProvider, TimeProvider>();
 
             services.AddScoped<IValidatorExtensions, ValidatorExtensions>();
 
