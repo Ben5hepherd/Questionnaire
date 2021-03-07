@@ -9,7 +9,7 @@ using static QuestionnaireApp.WebApi.Requests.QuestionnaireRequests.AddQuestionn
 using System.Threading;
 using QuestionnaireApp.WebApi.TimeProviders;
 
-namespace QuestionnaireApp.Tests.UnitTests.WebApi.Requests
+namespace QuestionnaireApp.Tests.UnitTests.WebApi.Requests.QuestionnaireRequests
 {
     public class AddQuestionnaireRequestTest : TestsBase
     {
