@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { ResponseService } from './response.service';
+import ResponseService from './response.service';
 
 describe('ResponseService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
