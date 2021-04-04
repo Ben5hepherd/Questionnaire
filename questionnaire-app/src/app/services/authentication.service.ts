@@ -9,10 +9,21 @@ import { environment } from '../../environments/environment';
 })
 export class AuthenticationService {
 
-  isUserAdmin: boolean;
-  currentUserEmail: string;
-  currentUserId: number;
+  private _isUserAdmin: boolean;
+  get isUserAdmin(): boolean {
+    return this._isUserAdmin;
+  }
 
+  private _currentUserEmail: string;
+  get currentUserEmail(): string {
+    return this._currentUserEmail;
+  }
+
+  private _currentUserId: number;
+  get currentUserId(): number {
+    return this._currentUserId;
+  }
+  
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   registerUser(model) {
@@ -31,17 +42,17 @@ export class AuthenticationService {
     let bearerToken = localStorage.getItem('bearer-token');
     if(bearerToken) {
       this.httpClient.get<UserViewModel>(environment.url + '/api/user/loggedInUser').subscribe((res: UserViewModel) => {
-        this.isUserAdmin = res.isAdmin;
-        this.currentUserEmail = res.email;
-        this.currentUserId = res.id;
+        this._isUserAdmin = res.isAdmin;
+        this._currentUserEmail = res.email;
+        this._currentUserId = res.id;
       })
     }
   }
 
   logout() {
     localStorage.clear();
-    this.isUserAdmin = null;
-    this.currentUserEmail = null;
-    this.currentUserId = null;
+    this._isUserAdmin = null;
+    this._currentUserEmail = null;
+    this._currentUserId = null;
   }
 }

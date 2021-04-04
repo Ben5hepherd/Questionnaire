@@ -1605,6 +1605,15 @@ let AuthenticationService = class AuthenticationService {
         this.httpClient = httpClient;
         this.router = router;
     }
+    get isUserAdmin() {
+        return this._isUserAdmin;
+    }
+    get currentUserEmail() {
+        return this._currentUserEmail;
+    }
+    get currentUserId() {
+        return this._currentUserId;
+    }
     registerUser(model) {
         return this.httpClient.post(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url + '/api/user', model);
     }
@@ -1619,17 +1628,17 @@ let AuthenticationService = class AuthenticationService {
         let bearerToken = localStorage.getItem('bearer-token');
         if (bearerToken) {
             this.httpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url + '/api/user/loggedInUser').subscribe((res) => {
-                this.isUserAdmin = res.isAdmin;
-                this.currentUserEmail = res.email;
-                this.currentUserId = res.id;
+                this._isUserAdmin = res.isAdmin;
+                this._currentUserEmail = res.email;
+                this._currentUserId = res.id;
             });
         }
     }
     logout() {
         localStorage.clear();
-        this.isUserAdmin = null;
-        this.currentUserEmail = null;
-        this.currentUserId = null;
+        this._isUserAdmin = null;
+        this._currentUserEmail = null;
+        this._currentUserId = null;
     }
 };
 AuthenticationService.ctorParameters = () => [
