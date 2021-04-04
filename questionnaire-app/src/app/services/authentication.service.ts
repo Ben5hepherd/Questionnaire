@@ -11,6 +11,7 @@ export class AuthenticationService {
 
   isUserAdmin: boolean;
   currentUserEmail: string;
+  currentUserId: number;
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -21,10 +22,7 @@ export class AuthenticationService {
   loginUser(model) {
     return this.httpClient.post<any>(environment.url + '/api/login', model).subscribe(result => {
       localStorage.setItem('bearer-token', result.token);
-      
-      this.currentUserEmail = model.Email;
-      this.isUserAdmin = result.isAdmin;
-
+      this.setUserDetails();
       return this.router.navigateByUrl('/questionnaire-list');
     });
   }
@@ -35,13 +33,15 @@ export class AuthenticationService {
       this.httpClient.get<UserViewModel>(environment.url + '/api/user/loggedInUser').subscribe((res: UserViewModel) => {
         this.isUserAdmin = res.isAdmin;
         this.currentUserEmail = res.email;
+        this.currentUserId = res.id;
       })
     }
   }
 
   logout() {
     localStorage.clear();
-    this.currentUserEmail = null;
     this.isUserAdmin = null;
+    this.currentUserEmail = null;
+    this.currentUserId = null;
   }
 }

@@ -57,7 +57,7 @@ export class QuestionnaireListComponent implements OnInit {
 
   addQuestionnaire(name: string) {
     var model = {
-      CreatedByUserId: 1,
+      CreatedByUserId: this.authenticationService.currentUserId,
       Name: name
     };
 

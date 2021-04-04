@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-card>\r\n    <mat-card-header>\r\n        <mat-card-title>{{name}}</mat-card-title>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n        <div class=\"action-buttons\" *ngIf=\"authenticationService.isUserAdmin\">\r\n            <div class=\"add-section-button\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"openAddSectionDialog()\">Add Section</button>\r\n            </div>\r\n            <div class=\"add-question-button\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"openAddQuestionDialog()\">Add Question</button>\r\n            </div>\r\n        </div>\r\n        <div *ngFor=\"let section of orderedSections\">\r\n            <section [name]=\"section.name\" [questions]=\"section.questions\"></section>\r\n            <br />\r\n            <hr>\r\n        </div>\r\n    </mat-card-content>\r\n</mat-card>");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-card>\r\n    <mat-card-header>\r\n        <mat-card-title>{{name}}</mat-card-title>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n        <div class=\"action-buttons\" *ngIf=\"authenticationService.isUserAdmin\">\r\n            <div class=\"add-section-button\">\r\n                <button id=\"add-section-button\" mat-raised-button color=\"primary\" (click)=\"openAddSectionDialog()\">Add Section</button>\r\n            </div>\r\n            <div class=\"add-question-button\">\r\n                <button id=\"add-question-button\" mat-raised-button color=\"primary\" (click)=\"openAddQuestionDialog()\">Add Question</button>\r\n            </div>\r\n        </div>\r\n        <div *ngFor=\"let section of orderedSections\">\r\n            <section [name]=\"section.name\" [questions]=\"section.questions\"></section>\r\n            <br />\r\n            <hr>\r\n        </div>\r\n    </mat-card-content>\r\n</mat-card>");
 
 /***/ }),
 
@@ -1119,7 +1119,7 @@ let QuestionnaireListComponent = class QuestionnaireListComponent {
     }
     addQuestionnaire(name) {
         var model = {
-            CreatedByUserId: 1,
+            CreatedByUserId: this.authenticationService.currentUserId,
             Name: name
         };
         let questionnaireToAddToList = new _view_models_questionnaire_list_view_model__WEBPACK_IMPORTED_MODULE_3__["default"]();
@@ -1611,8 +1611,7 @@ let AuthenticationService = class AuthenticationService {
     loginUser(model) {
         return this.httpClient.post(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url + '/api/login', model).subscribe(result => {
             localStorage.setItem('bearer-token', result.token);
-            this.currentUserEmail = model.Email;
-            this.isUserAdmin = result.isAdmin;
+            this.setUserDetails();
             return this.router.navigateByUrl('/questionnaire-list');
         });
     }
@@ -1622,13 +1621,15 @@ let AuthenticationService = class AuthenticationService {
             this.httpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url + '/api/user/loggedInUser').subscribe((res) => {
                 this.isUserAdmin = res.isAdmin;
                 this.currentUserEmail = res.email;
+                this.currentUserId = res.id;
             });
         }
     }
     logout() {
         localStorage.clear();
-        this.currentUserEmail = null;
         this.isUserAdmin = null;
+        this.currentUserEmail = null;
+        this.currentUserId = null;
     }
 };
 AuthenticationService.ctorParameters = () => [
