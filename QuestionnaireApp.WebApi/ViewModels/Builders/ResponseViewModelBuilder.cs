@@ -46,7 +46,8 @@ namespace QuestionnaireApp.WebApi.ViewModels.Builders
             {
                 Id = response.Id,
                 CompletedByUser = mapper.Map<UserViewModel>(response.CompletedByUser),
-                Sections = orderedResponseSections.ToList()
+                Sections = orderedResponseSections.ToList(),
+                DateModified = response.DateModified
             };
 
             return responseViewModel;

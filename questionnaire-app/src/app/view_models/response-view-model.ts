@@ -6,5 +6,6 @@ import ResponseSectionViewModel from './response-section-view-model';
 export default class ResponseViewModel {
     id: number;
     completedByUser: UserViewModel;
+    dateModified: Date;
     sections: ResponseSectionViewModel[];
 }

@@ -5,9 +5,12 @@ namespace QuestionnaireApp.Domain
     public class Answer : Entity
     {
         public string Text { get; set; }
+
         public virtual Question Question { get; set; }
+
         public virtual Response Response { get; set; }
-        
+        public int ResponseId { get; set; }
+
         [NotMapped]
         public virtual string SectionName => Question.Section.Name;
         [NotMapped]

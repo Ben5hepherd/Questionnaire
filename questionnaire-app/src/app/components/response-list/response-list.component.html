@@ -9,7 +9,7 @@
                     {{response.id}} - {{response.completedByUser.email}}
                 </mat-panel-title>
                 <mat-panel-description>
-                    DATE COMPLETED (TO-DO)
+                    {{response.dateModified | date:'medium'}}
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div *ngFor="let section of response.sections">

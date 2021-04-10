@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace QuestionnaireApp.WebApi.ViewModels
 {
@@ -6,5 +7,6 @@ namespace QuestionnaireApp.WebApi.ViewModels
     {
         public UserViewModel CompletedByUser { get; set; }
         public List<ResponseSectionViewModel> Sections { get; set; }
+        public DateTime DateModified { get; set; }
     }
 }

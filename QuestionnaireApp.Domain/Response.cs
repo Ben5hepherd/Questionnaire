@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace QuestionnaireApp.Domain
 {
@@ -7,5 +8,6 @@ namespace QuestionnaireApp.Domain
         public virtual User CompletedByUser { get; set; }
         public virtual Questionnaire Questionnaire { get; set; }
         public virtual IEnumerable<Answer> Answers { get; set; }
+        public DateTime DateModified { get; set; }
     }
 }

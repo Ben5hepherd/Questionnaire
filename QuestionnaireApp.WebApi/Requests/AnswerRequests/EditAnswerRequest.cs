@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using QuestionnaireApp.CommandQuery.Commands.Interfaces;
 using QuestionnaireApp.Domain;
 using QuestionnaireApp.CommandQuery.Queries.Interfaces;
+using QuestionnaireApp.WebApi.TimeProviders;
 
 namespace QuestionnaireApp.WebApi.Requests.AnswerRequests
 {
@@ -16,20 +17,26 @@ namespace QuestionnaireApp.WebApi.Requests.AnswerRequests
         {
             private readonly IUpdateEntityCommand UpdateEntityCommand;
             private readonly IGetEntityByIdQuery GetEntityByIdQuery;
+            private readonly ITimeProvider TimeProvider;
 
-            public EditAnswerRequestHandler(IUpdateEntityCommand updateEntityCommand, IGetEntityByIdQuery getEntityByIdQuery)
+            public EditAnswerRequestHandler(IUpdateEntityCommand updateEntityCommand, IGetEntityByIdQuery getEntityByIdQuery, ITimeProvider timeProvider)
             {
                 UpdateEntityCommand = updateEntityCommand;
                 GetEntityByIdQuery = getEntityByIdQuery;
+                TimeProvider = timeProvider;
             }
 
             public Task<int> Handle(EditAnswerRequest request, CancellationToken cancellationToken)
             {
                 var model = request.Model;
                 var answer = GetEntityByIdQuery.Execute<Answer>(model.AnswerId);
-
+                var response = GetEntityByIdQuery.Execute<Response>(answer.ResponseId);
+                
                 answer.Text = model.UpdatedText;
                 UpdateEntityCommand.Execute(answer);
+
+                response.DateModified = TimeProvider.GetDateTimeNow();
+                UpdateEntityCommand.Execute(response);
 
                 return Task.FromResult(answer.Id);
             }
