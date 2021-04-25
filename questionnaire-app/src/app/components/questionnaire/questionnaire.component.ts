@@ -10,6 +10,7 @@ import { AddSectionDialogComponent } from '../add-section-dialog/add-section-dia
 import SectionViewModel from 'src/app/view_models/section-view-model';
 import { SectionService } from 'src/app/services/section.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { MatSnackBar } from '../../../../node_modules/@angular/material/snack-bar';
 
 @Component({
   selector: 'app-questionnaire',
@@ -29,7 +30,8 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
     private questionService: QuestionService,
     private sectionService: SectionService,
     private authenticationService: AuthenticationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -87,7 +89,18 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
     questionToAddToList.ordinal = model.Ordinal;
 
     this.questionService.post(model).subscribe(result => {
-      questionToAddToList.id = result
+      questionToAddToList.id = result;
+      this.snackBar.open("Question Added", "",
+      {
+        duration: 2000,
+        panelClass: "success-snack-bar"
+      });
+    }, error => {
+      this.snackBar.open("Question Failed to Add", "",
+      {
+        duration: 2000,
+        panelClass: "error-snack-bar"
+      });
     });
 
     this.orderedSections.find(s => s.id === sectionId).questions.push(questionToAddToList);
@@ -106,7 +119,18 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
     sectionToAddToList.questions = [];
 
     this.sectionService.post(model).subscribe(result => {
-      sectionToAddToList.id = result
+      sectionToAddToList.id = result;
+      this.snackBar.open("Section Added", "",
+      {
+        duration: 2000,
+        panelClass: "success-snack-bar"
+      });
+    }, error => {
+      this.snackBar.open("Section Failed to Add", "",
+      {
+        duration: 2000,
+        panelClass: "error-snack-bar"
+      });
     });
     this.orderedSections.push(sectionToAddToList);
   }

@@ -868,20 +868,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_services_answer_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/answer.service */ "./src/app/services/answer.service.ts");
+/* harmony import */ var _node_modules_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/@angular/material/snack-bar */ "./node_modules/@angular/material/esm2015/snack-bar.js");
+
 
 
 
 let AnswerComponent = class AnswerComponent {
-    constructor(answerService) {
+    constructor(answerService, snackBar) {
         this.answerService = answerService;
+        this.snackBar = snackBar;
     }
     updateAnswer() {
         let model = { AnswerId: this.answer.id, UpdatedText: this.answer.text };
-        this.answerService.put(model).subscribe(result => result);
+        this.answerService.put(model).subscribe(result => {
+            this.snackBar.open("Answer Updated", "", {
+                duration: 2000,
+                panelClass: "success-snack-bar"
+            });
+        }, error => {
+            this.snackBar.open("Answer Failed to Update", "", {
+                duration: 2000,
+                panelClass: "error-snack-bar"
+            });
+        });
     }
 };
 AnswerComponent.ctorParameters = () => [
-    { type: src_app_services_answer_service__WEBPACK_IMPORTED_MODULE_2__["default"] }
+    { type: src_app_services_answer_service__WEBPACK_IMPORTED_MODULE_2__["default"] },
+    { type: _node_modules_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__["MatSnackBar"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -1073,6 +1087,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_angular_material_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../node_modules/@angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
 /* harmony import */ var _add_questionnaire_dialog_add_questionnaire_dialog_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../add-questionnaire-dialog/add-questionnaire-dialog.component */ "./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.ts");
 /* harmony import */ var _node_modules_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../node_modules/@angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
+/* harmony import */ var _node_modules_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../node_modules/@angular/material/snack-bar */ "./node_modules/@angular/material/esm2015/snack-bar.js");
+
 
 
 
@@ -1084,12 +1100,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let QuestionnaireListComponent = class QuestionnaireListComponent {
-    constructor(questionnaireService, responseService, authenticationService, router, dialog) {
+    constructor(questionnaireService, responseService, authenticationService, router, dialog, snackBar) {
         this.questionnaireService = questionnaireService;
         this.responseService = responseService;
         this.authenticationService = authenticationService;
         this.router = router;
         this.dialog = dialog;
+        this.snackBar = snackBar;
         this.dataSource = new _node_modules_angular_material_table__WEBPACK_IMPORTED_MODULE_7__["MatTableDataSource"]();
         this.displayedColumns = ['id', 'name', 'createdDate', 'viewButton', 'responseButton', 'responseListButton'];
     }
@@ -1129,6 +1146,15 @@ let QuestionnaireListComponent = class QuestionnaireListComponent {
             questionnaireToAddToList.id = result;
             this.dataSource.data.push(questionnaireToAddToList);
             this.dataSource._updateChangeSubscription();
+            this.snackBar.open("Questionnaire Added", "", {
+                duration: 2000,
+                panelClass: "success-snack-bar"
+            });
+        }, error => {
+            this.snackBar.open("Questionnaire Failed to Add", "", {
+                duration: 2000,
+                panelClass: "error-snack-bar"
+            });
         });
     }
     viewQuestionnaire(questionnaireId) {
@@ -1136,7 +1162,18 @@ let QuestionnaireListComponent = class QuestionnaireListComponent {
     }
     addResponse(questionnaireId) {
         var model = { QuestionnaireId: questionnaireId };
-        this.responseService.post(model).subscribe(responseId => this.viewResponse(responseId));
+        this.responseService.post(model).subscribe(responseId => {
+            this.viewResponse(responseId);
+            this.snackBar.open("Response Added", "", {
+                duration: 2000,
+                panelClass: "success-snack-bar"
+            });
+        }, error => {
+            this.snackBar.open("Response Failed to Add", "", {
+                duration: 2000,
+                panelClass: "error-snack-bar"
+            });
+        });
     }
     viewResponse(responseId) {
         return this.router.navigateByUrl('/response/' + responseId);
@@ -1150,7 +1187,8 @@ QuestionnaireListComponent.ctorParameters = () => [
     { type: _services_response_service__WEBPACK_IMPORTED_MODULE_5__["default"] },
     { type: src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _node_modules_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"] }
+    { type: _node_modules_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"] },
+    { type: _node_modules_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_10__["MatSnackBar"] }
 ];
 QuestionnaireListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1199,6 +1237,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_view_models_section_view_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/view_models/section-view-model */ "./src/app/view_models/section-view-model.ts");
 /* harmony import */ var src_app_services_section_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/services/section.service */ "./src/app/services/section.service.ts");
 /* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/authentication.service */ "./src/app/services/authentication.service.ts");
+/* harmony import */ var _node_modules_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../node_modules/@angular/material/snack-bar */ "./node_modules/@angular/material/esm2015/snack-bar.js");
+
 
 
 
@@ -1212,13 +1252,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let QuestionnaireComponent = class QuestionnaireComponent {
-    constructor(route, questionnaireService, questionService, sectionService, authenticationService, dialog) {
+    constructor(route, questionnaireService, questionService, sectionService, authenticationService, dialog, snackBar) {
         this.route = route;
         this.questionnaireService = questionnaireService;
         this.questionService = questionService;
         this.sectionService = sectionService;
         this.authenticationService = authenticationService;
         this.dialog = dialog;
+        this.snackBar = snackBar;
     }
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
@@ -1268,6 +1309,15 @@ let QuestionnaireComponent = class QuestionnaireComponent {
         questionToAddToList.ordinal = model.Ordinal;
         this.questionService.post(model).subscribe(result => {
             questionToAddToList.id = result;
+            this.snackBar.open("Question Added", "", {
+                duration: 2000,
+                panelClass: "success-snack-bar"
+            });
+        }, error => {
+            this.snackBar.open("Question Failed to Add", "", {
+                duration: 2000,
+                panelClass: "error-snack-bar"
+            });
         });
         this.orderedSections.find(s => s.id === sectionId).questions.push(questionToAddToList);
     }
@@ -1283,6 +1333,15 @@ let QuestionnaireComponent = class QuestionnaireComponent {
         sectionToAddToList.questions = [];
         this.sectionService.post(model).subscribe(result => {
             sectionToAddToList.id = result;
+            this.snackBar.open("Section Added", "", {
+                duration: 2000,
+                panelClass: "success-snack-bar"
+            });
+        }, error => {
+            this.snackBar.open("Section Failed to Add", "", {
+                duration: 2000,
+                panelClass: "error-snack-bar"
+            });
         });
         this.orderedSections.push(sectionToAddToList);
     }
@@ -1293,7 +1352,8 @@ QuestionnaireComponent.ctorParameters = () => [
     { type: src_app_services_question_service__WEBPACK_IMPORTED_MODULE_4__["default"] },
     { type: src_app_services_section_service__WEBPACK_IMPORTED_MODULE_10__["SectionService"] },
     { type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_11__["AuthenticationService"] },
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] }
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] },
+    { type: _node_modules_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_12__["MatSnackBar"] }
 ];
 QuestionnaireComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

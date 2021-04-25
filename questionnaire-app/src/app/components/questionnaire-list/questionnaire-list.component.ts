@@ -9,6 +9,7 @@ import QuestionnaireViewModel from 'src/app/view_models/questionnaire-view-model
 import { MatTableDataSource } from '../../../../node_modules/@angular/material/table';
 import { AddQuestionnaireDialogComponent, AddQuestionnaireModel } from '../add-questionnaire-dialog/add-questionnaire-dialog.component';
 import { MatDialog } from '../../../../node_modules/@angular/material/dialog';
+import { MatSnackBar } from '../../../../node_modules/@angular/material/snack-bar';
 
 @Component({
   selector: 'app-questionnaire-list',
@@ -25,7 +26,8 @@ export class QuestionnaireListComponent implements OnInit {
     private responseService: ResponseService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.questionnaireService.getAll().subscribe(questionnairesReturned => {
@@ -69,6 +71,17 @@ export class QuestionnaireListComponent implements OnInit {
       questionnaireToAddToList.id = result;
       this.dataSource.data.push(questionnaireToAddToList);
       this.dataSource._updateChangeSubscription();
+      this.snackBar.open("Questionnaire Added", "",
+      {
+        duration: 2000,
+        panelClass: "success-snack-bar"
+      });
+    },error => {
+      this.snackBar.open("Questionnaire Failed to Add", "",
+      {
+        duration: 2000,
+        panelClass: "error-snack-bar"
+      });
     });
 
   }
@@ -79,7 +92,20 @@ export class QuestionnaireListComponent implements OnInit {
 
   addResponse(questionnaireId: number) {
     var model = { QuestionnaireId: questionnaireId };
-    this.responseService.post(model).subscribe(responseId => this.viewResponse(responseId));
+    this.responseService.post(model).subscribe(responseId => {
+      this.viewResponse(responseId);
+      this.snackBar.open("Response Added", "",
+      {
+        duration: 2000,
+        panelClass: "success-snack-bar"
+      });
+    }, error => {
+      this.snackBar.open("Response Failed to Add", "",
+      {
+        duration: 2000,
+        panelClass: "error-snack-bar"
+      });
+    });
   }
 
   viewResponse(responseId: number) {
