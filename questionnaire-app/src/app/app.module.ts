@@ -35,6 +35,7 @@ import { ResponseListComponent } from './components/response-list/response-list.
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AddQuestionnaireDialogComponent } from './components/add-questionnaire-dialog/add-questionnaire-dialog.component';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AddQuestionnaireDialogComponent } from './components/add-questionnaire-
     MatMenuModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [
     {

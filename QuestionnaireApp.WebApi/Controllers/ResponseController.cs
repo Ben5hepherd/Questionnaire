@@ -36,5 +36,12 @@ namespace QuestionnaireApp.WebApi.Controllers
         {
             return mediator.Send(new GetResponsesByQuestionnaireIdRequest { QuestionnaireId = questionnaireId }).Result;
         }
+
+        [HttpDelete("{responseId}")]
+        [Authorize(Roles = "Admin")]
+        public async void Delete(int responseId)
+        {
+            await mediator.Send(new DeleteResponseByIdRequest { ResponseId = responseId });
+        }
     }
 }

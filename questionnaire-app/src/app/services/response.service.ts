@@ -21,4 +21,8 @@ export default class ResponseService {
   post(model) {
     return this.httpClient.post<number>(environment.url + '/api/response', model);
   }
+
+  delete(id: number) {
+    return this.httpClient.delete<number>(environment.url + '/api/response/' + id);
+  }
 }

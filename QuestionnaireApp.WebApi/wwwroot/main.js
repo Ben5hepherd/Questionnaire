@@ -149,7 +149,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"responses-container\">\r\n    <div>\r\n        <h2>Responses for Questionnaire: {{questionnaireName}}</h2>\r\n    </div>\r\n    <mat-accordion class=\"example-headers-align\" multi *ngFor=\"let response of responses\">\r\n        <mat-expansion-panel>\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    {{response.id}} - {{response.completedByUser.email}}\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{response.dateModified | date:'medium'}}\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            <div *ngFor=\"let section of response.sections\">\r\n                <mat-card>\r\n                    <mat-card-header>\r\n                        <mat-card-title>{{section.sectionOrdinal + 1}} - {{section.sectionName}}</mat-card-title>\r\n                    </mat-card-header>\r\n                    <mat-card-content>\r\n                        <div *ngFor=\"let answer of section.answers\">\r\n                            <h4>{{answer.question.ordinal + 1}} - {{answer.question.text}}</h4>\r\n                            <p *ngIf=\"answer.text && answer.text.length > 0\">{{answer.text}}</p>\r\n                            <p *ngIf=\"!answer.text || answer.text.length === 0\">NO ANSWER GIVEN</p>\r\n                        </div>\r\n                    </mat-card-content>\r\n                </mat-card>\r\n                <br />\r\n            </div>\r\n        </mat-expansion-panel>\r\n    </mat-accordion>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"responses-container\">\r\n    <div>\r\n        <h2>Responses for Questionnaire: {{questionnaireName}}</h2>\r\n    </div>\r\n    <mat-accordion class=\"example-headers-align\" multi *ngFor=\"let response of responses\">\r\n        <mat-expansion-panel>\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    {{response.id}} - {{response.completedByUser.email}}\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{response.dateModified | date:'medium'}}\r\n                    <button (click)=\"delete(response.id);$event.stopPropagation()\" mat-icon-button color=\"warn\">\r\n                        <mat-icon>delete</mat-icon>\r\n                    </button>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            <div *ngFor=\"let section of response.sections\">\r\n                <mat-card>\r\n                    <mat-card-header>\r\n                        <mat-card-title>{{section.sectionOrdinal + 1}} - {{section.sectionName}}</mat-card-title>\r\n                    </mat-card-header>\r\n                    <mat-card-content>\r\n                        <div *ngFor=\"let answer of section.answers\">\r\n                            <h4>{{answer.question.ordinal + 1}} - {{answer.question.text}}</h4>\r\n                            <p *ngIf=\"answer.text && answer.text.length > 0\">{{answer.text}}</p>\r\n                            <p *ngIf=\"!answer.text || answer.text.length === 0\">NO ANSWER GIVEN</p>\r\n                        </div>\r\n                    </mat-card-content>\r\n                </mat-card>\r\n                <br />\r\n            </div>\r\n        </mat-expansion-panel>\r\n    </mat-accordion>\r\n</div>");
 
 /***/ }),
 
@@ -580,6 +580,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @angular/material/expansion */ "./node_modules/@angular/material/esm2015/expansion.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _components_add_questionnaire_dialog_add_questionnaire_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/add-questionnaire-dialog/add-questionnaire-dialog.component */ "./src/app/components/add-questionnaire-dialog/add-questionnaire-dialog.component.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+
 
 
 
@@ -651,7 +653,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_menu__WEBPACK_IMPORTED_MODULE_24__["MatMenuModule"],
             _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_28__["MatSnackBarModule"],
             _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_29__["MatProgressSpinnerModule"],
-            _angular_material_expansion__WEBPACK_IMPORTED_MODULE_31__["MatExpansionModule"]
+            _angular_material_expansion__WEBPACK_IMPORTED_MODULE_31__["MatExpansionModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_34__["MatIconModule"]
         ],
         providers: [
             {
@@ -1392,16 +1395,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResponseListComponent", function() { return ResponseListComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var src_app_services_response_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/response.service */ "./src/app/services/response.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var src_app_services_response_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/response.service */ "./src/app/services/response.service.ts");
+
 
 
 
 
 let ResponseListComponent = class ResponseListComponent {
-    constructor(route, responseService) {
+    constructor(route, responseService, snackBar) {
         this.route = route;
         this.responseService = responseService;
+        this.snackBar = snackBar;
         this.questionnaireName = "To-do";
         this.responses = [];
     }
@@ -1415,10 +1421,25 @@ let ResponseListComponent = class ResponseListComponent {
             });
         });
     }
+    delete(id) {
+        this.responseService.delete(id).subscribe(() => {
+            this.responses = this.responses.filter(r => r.id !== id);
+            this.snackBar.open("Response Deleted", "", {
+                duration: 2000,
+                panelClass: "success-snack-bar"
+            });
+        }, error => {
+            this.snackBar.open("Response Failed to Delete", "", {
+                duration: 2000,
+                panelClass: "error-snack-bar"
+            });
+        });
+    }
 };
 ResponseListComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-    { type: src_app_services_response_service__WEBPACK_IMPORTED_MODULE_3__["default"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: src_app_services_response_service__WEBPACK_IMPORTED_MODULE_4__["default"] },
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
 ];
 ResponseListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1861,6 +1882,9 @@ let ResponseService = class ResponseService {
     }
     post(model) {
         return this.httpClient.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url + '/api/response', model);
+    }
+    delete(id) {
+        return this.httpClient.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url + '/api/response/' + id);
     }
 };
 ResponseService.ctorParameters = () => [

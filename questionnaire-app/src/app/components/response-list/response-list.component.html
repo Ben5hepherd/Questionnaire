@@ -10,6 +10,9 @@
                 </mat-panel-title>
                 <mat-panel-description>
                     {{response.dateModified | date:'medium'}}
+                    <button (click)="delete(response.id);$event.stopPropagation()" mat-icon-button color="warn">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div *ngFor="let section of response.sections">
