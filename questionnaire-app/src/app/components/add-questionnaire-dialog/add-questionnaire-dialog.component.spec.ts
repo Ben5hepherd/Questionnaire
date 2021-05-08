@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule, MatDialogRef, MatFormFieldModule, MatInputModule, MAT_DIALOG_DATA } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogRefStub, MatDialogStub } from 'src/app/test-stubs';
 
 import { AddQuestionnaireDialogComponent } from './add-questionnaire-dialog.component';
 
@@ -6,9 +10,25 @@ describe('AddQuestionnaireDialogComponent', () => {
   let component: AddQuestionnaireDialogComponent;
   let fixture: ComponentFixture<AddQuestionnaireDialogComponent>;
 
+  let matDialogMock = new MatDialogStub();
+  let matDialogRefMock = new MatDialogRefStub();
+  let matDialogDataMock = { name: "test" };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddQuestionnaireDialogComponent ]
+      declarations: [ AddQuestionnaireDialogComponent ],
+      providers:[
+        { provide: MatDialog, useValue: matDialogMock },
+        { provide: MatDialogRef, useValue: matDialogRefMock },
+        { provide: MAT_DIALOG_DATA, useValue: matDialogDataMock }
+      ],
+      imports: [
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   }));

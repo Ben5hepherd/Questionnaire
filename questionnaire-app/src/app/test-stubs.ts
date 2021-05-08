@@ -42,3 +42,17 @@ export class MatDialogRefStub {
     return;
   }
 }
+
+export class MatSnackBarStub {
+  open(): any
+  {
+    return;
+  }
+}
+
+export class RouterStub {
+  navigateByUrl(): any
+  {
+    return;
+  }
+}

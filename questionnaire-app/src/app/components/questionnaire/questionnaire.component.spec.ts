@@ -10,7 +10,7 @@ import { MatCardModule } from '../../../../node_modules/@angular/material/card';
 import { of, Observable } from '../../../../node_modules/rxjs';
 import QuestionnaireViewModel from '../../view_models/questionnaire-view-model';
 import SectionViewModel from '../../view_models/section-view-model';
-import { ActivatedRouteStub, QuestionnaireServiceStub, QuestionServiceStub, SectionServiceStub, AuthenticationServiceStub, MatDialogStub, MatDialogRefStub } from '../../test-stubs';
+import { ActivatedRouteStub, QuestionnaireServiceStub, QuestionServiceStub, SectionServiceStub, AuthenticationServiceStub, MatDialogStub, MatDialogRefStub, MatSnackBarStub } from '../../test-stubs';
 import { By } from '../../../../node_modules/@angular/platform-browser';
 import { SectionComponent } from '../section/section.component';
 import { AddSectionDialogComponent } from '../add-section-dialog/add-section-dialog.component';
@@ -18,6 +18,7 @@ import { MatInputModule } from '../../../../node_modules/@angular/material/input
 import { MatFormFieldModule } from '../../../../node_modules/@angular/material/form-field';
 import { FormsModule } from '../../../../node_modules/@angular/forms';
 import { BrowserAnimationsModule } from '../../../../node_modules/@angular/platform-browser/animations';
+import { MatSnackBar } from '../../../../node_modules/@angular/material/snack-bar';
 
 const questionnaireId = 53;
 const questionnaireName = "Test Questionnaire 1";
@@ -41,8 +42,9 @@ let sectionServiceMock = new SectionServiceStub();
 let questionServiceMock = new QuestionServiceStub();
 let matDialogMock = new MatDialogStub();
 let matDialogRefMock = new MatDialogRefStub();
+let matSnackBarMock = new MatSnackBarStub();
 
-fdescribe('QuestionnaireComponent', () => {
+describe('QuestionnaireComponent', () => {
   let component: QuestionnaireComponent;
   let fixture: ComponentFixture<QuestionnaireComponent>;
 
@@ -60,7 +62,8 @@ fdescribe('QuestionnaireComponent', () => {
         { provide: SectionService, useValue: sectionServiceMock },
         { provide: AuthenticationService, useValue: authenticationServiceMock },
         { provide: MatDialog, useValue: matDialogMock },
-        { provide: MatDialogRef, useValue: matDialogRefMock }
+        { provide: MatDialogRef, useValue: matDialogRefMock },
+        { provide: MatSnackBar, useValue: matSnackBarMock }
       ],
       imports: [
         MatCardModule,
